@@ -19,12 +19,10 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-<<<<<<< HEAD
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-=======
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
->>>>>>> 052b6c1b225930535c71df9a306851f025a8ea9e
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -56,11 +54,8 @@ class BlogApiControllerTest {
     @DisplayName("addArticle: 블로그 글 추가 성공")
     @Test
     public void addArticle() throws Exception {
-<<<<<<< HEAD
+
         // [given] 블로그 글 추가에 필요한 요청 객체 생성
-=======
-        //  [given] 블로그 글 추가에 필요한 요청 객체 생성
->>>>>>> 052b6c1b225930535c71df9a306851f025a8ea9e
         final String url = "/api/articles";
         final String title = "title";
         final String content = "content";
@@ -103,27 +98,20 @@ class BlogApiControllerTest {
                 .build());
 
         // [when] 목록 조회 API 호출
-<<<<<<< HEAD
-=======
         // [then]
         // 1. 응답 코드가 200 OK
         // 2. 반환받은 값 中 0번째 요소의 content와 title이 저장된 값과 같은지 확인
->>>>>>> 052b6c1b225930535c71df9a306851f025a8ea9e
         final ResultActions resultActions = mockMvc.perform(get(url)
                 .accept(MediaType.APPLICATION_JSON));
 
         // [then]
-<<<<<<< HEAD
         // 1. 응답 코드가 200 OK
         // 2. 반환받은 값 中 0번째 요소의 content와 title이 저장된 값과 같은지 확인
-=======
->>>>>>> 052b6c1b225930535c71df9a306851f025a8ea9e
         resultActions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].content").value(content))
                 .andExpect(jsonPath("$[0].title").value(title));
     }
-<<<<<<< HEAD
 
     // 블로그 글 단건 조회 API 테스트 코드
     @DisplayName("findArticle: 블로그 글 단건 조회 성공")
@@ -150,31 +138,4 @@ class BlogApiControllerTest {
                 .andExpect(jsonPath("$.content").value(content))
                 .andExpect(jsonPath("$.title").value(title));
     }
-
-    // 블로그 글 삭제 API 테스트 코드
-    @DisplayName("deleteArticle: 블로그 글 삭제 성공")
-    @Test
-    public void deleteArticle() throws Exception {
-        // [given] 블로그 글 저장
-        final String url = "/api/articles/{id}";
-        final String title = "title";
-        final String content = "content";
-
-        Article savedArticle = blogRepository.save(Article.builder()
-                .title(title)
-                .content(content)
-                .build());
-
-        // [when] 저장한 블로그 글의 id 값으로 삭제 API 호출
-        mockMvc.perform(delete(url, savedArticle.getId()))
-                .andExpect(status().isOk());
-
-        // [then]
-        // 1. 응답 코드가 200 OK
-        // 2. 블로그 글 리스트 전체 조회해 조회한 배열 크기가 0인지 확인
-        List<Article> articles = blogRepository.findAll();
-        assertThat(articles.isEmpty());
-    }
-=======
->>>>>>> 052b6c1b225930535c71df9a306851f025a8ea9e
 }

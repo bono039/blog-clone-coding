@@ -7,14 +7,12 @@ import me.bono039.springbootblog.dto.ArticleResponse;
 import me.bono039.springbootblog.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
-=======
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
->>>>>>> 052b6c1b225930535c71df9a306851f025a8ea9e
 
 import java.util.List;
 
@@ -46,7 +44,6 @@ public class BlogApiController {
         return ResponseEntity.ok()
                 .body(articles);
     }
-<<<<<<< HEAD
 
     // URL 경로에서 값 추출
     @GetMapping("/api/articles/{id}")
@@ -56,15 +53,4 @@ public class BlogApiController {
         return ResponseEntity.ok()
                 .body(new ArticleResponse(article));
     }
-
-    // 글 삭제 메소드
-    @DeleteMapping("/api/articles/{id}")
-    public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
-        blogService.delete(id);
-
-        return ResponseEntity.ok()
-                .build();
-    }
-=======
->>>>>>> 052b6c1b225930535c71df9a306851f025a8ea9e
 }
