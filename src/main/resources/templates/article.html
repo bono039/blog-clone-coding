@@ -15,6 +15,7 @@
     <div class="row">    <!-- 1. article 개수만큼 반복-->
         <div class="col-lg-8">
             <article>
+                <input type="hidden" id="article-id" th:value="${article.id}">  <!-- 블로그 글 id 추가-->
                 <header class="mb-4">
                     <h1 class="fw-bolder mb-1" th:text="${article.title}"></h1>
                     <div class="text-muted fst-italic mb-2" th:text="|Posted on ${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')}|"></div>
@@ -23,10 +24,11 @@
                     <p class="fs-5 mb-4" th:text="${article.content}"></p>
                 </section>
                 <button type="button" class="btn btn-primary btn-sm">수정</button>
-                <button type="button" class="btn btn-secondary btn-sm">삭제</button>
+                <button type="button" id="delete-btn" class="btn btn-secondary btn-sm">삭제</button>  <!-- article.js 삭제 코드 실행하도록 버튼에 id 추가-->
             </article>
         </div>
     </div>
 </div>
+<script src="/js/article.js"></script>  <!-- article.js 파일 추가-->
 </body>
 </html>
