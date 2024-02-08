@@ -3,8 +3,10 @@ package me.bono039.springbootblog.service;
 import lombok.RequiredArgsConstructor;
 import me.bono039.springbootblog.domain.Article;
 import me.bono039.springbootblog.dto.AddArticleRequest;
+import me.bono039.springbootblog.dto.UpdateArticleRequest;
 import me.bono039.springbootblog.repository.BlogRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,4 +31,21 @@ public class BlogService {
         return blogRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
     }
+
+    // [블로그 글 삭제]
+    public void delete(long id) {
+        blogRepository.deleteById(id);
+    }
+
+    // [블로그 글 수정]
+    @Transactional
+    public Article update(long id, UpdateArticleRequest request) {
+        Article article = blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+
+        article.update(request.getTitle(), request.getContent());
+
+        return article;
+    }
+
 }
