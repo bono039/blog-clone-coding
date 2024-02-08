@@ -5,6 +5,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter                                             // 접근자 메소드 생성
@@ -28,6 +32,14 @@ public class Article {
         this.title   = title;
         this.content = content;
     }
+
+    @CreatedDate    // 엔티티 생성 시 생성 시간 저장
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate   // 엔티티 수정 시 수정 시간 저장
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     public void update(String title, String content) {
         this.title = title;
