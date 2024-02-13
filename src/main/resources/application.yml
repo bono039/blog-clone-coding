@@ -17,3 +17,7 @@ spring:
   h2: # H2 서버 활성화
     console:
       enabled: true
+
+jwt:
+  issuer: wendyhan03@naver.com
+  secret_key: study-springboot
