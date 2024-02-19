@@ -13,10 +13,21 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
 
-
   h2: # H2 서버 활성화
     console:
       enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: <<클라이언트ID>>
+            client-secret: <<클라리언트 보안 비밀번호>>
+            scope:
+              - email
+              - profile
+
 
 jwt:
   issuer: wendyhan03@naver.com
