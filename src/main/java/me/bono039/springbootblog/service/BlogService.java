@@ -5,6 +5,7 @@ import me.bono039.springbootblog.domain.Article;
 import me.bono039.springbootblog.dto.AddArticleRequest;
 import me.bono039.springbootblog.dto.UpdateArticleRequest;
 import me.bono039.springbootblog.repository.BlogRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,10 @@ public class BlogService {
 
     // [블로그 글 삭제]
     public void delete(long id) {
+        Article article = blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+
+        authorizeArticleAuthor(article);    // 게시글 작성한 유저인지 확인
         blogRepository.deleteById(id);
     }
 
@@ -44,8 +49,16 @@ public class BlogService {
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
 
         article.update(request.getTitle(), request.getContent());
-
+        authorizeArticleAuthor(article);    // 게시글 작성한 유저인지 확인
         return article;
     }
 
+    // 게시글 작성한 유저인지 확인
+    private static void authorizeArticleAuthor(Article article) {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        if(!article.getAuthor().equals(userName)) {
+            throw new IllegalArgumentException("not authorized");
+        }
+    }
 }
