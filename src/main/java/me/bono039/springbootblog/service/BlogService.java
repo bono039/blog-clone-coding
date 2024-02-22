@@ -48,8 +48,9 @@ public class BlogService {
         Article article = blogRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
 
-        article.update(request.getTitle(), request.getContent());
         authorizeArticleAuthor(article);    // 게시글 작성한 유저인지 확인
+        article.update(request.getTitle(), request.getContent());
+
         return article;
     }
 

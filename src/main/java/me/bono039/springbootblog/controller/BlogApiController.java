@@ -24,7 +24,7 @@ public class BlogApiController {
 
     private final BlogService blogService;
 
-    // HTTP 메소드가 POST일 때 전달받은 URL과 같으면 메소드로 매핑
+    // HTTP 메서드가 POST일 때 전달받은 URL과 같으면 메서드로 매핑
     @PostMapping("/api/articles")
     // @RequestBody로 요청 본문 값 매핑
     public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request, Principal principal) {
@@ -35,7 +35,7 @@ public class BlogApiController {
                             .body(savedArticle);
     }
 
-    // 글 전체 조회 메소드
+    // 글 전체 조회 메서드
     @GetMapping("/api/articles")
     public ResponseEntity<List<ArticleResponse>> findAllArticles() {
         List<ArticleResponse> articles = blogService.findAll()
@@ -56,7 +56,7 @@ public class BlogApiController {
                 .body(new ArticleResponse(article));
     }
 
-    // 글 삭제 메소드
+    // 글 삭제 메서드
     @DeleteMapping("/api/articles/{id}")
     public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
         blogService.delete(id);
@@ -65,7 +65,7 @@ public class BlogApiController {
                 .build();
     }
 
-    // 글 삭제 메소드
+    // 글 수정 메서드
     @PutMapping("/api/articles/{id}")
     public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody UpdateArticleRequest request) {
         Article updatedArticle = blogService.update(id, request);

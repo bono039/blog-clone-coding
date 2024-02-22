@@ -39,6 +39,13 @@ public class User implements UserDetails {  // UserDetails 상속받아 인증 �
         this.nickname = nickname;
     }
 
+    // 사용자 이름 변경
+    public User update(String nickname) {
+        this.nickname = nickname;
+
+        return this;
+    }
+
     // 사용자가 갖는 권한 목록 반환
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -81,10 +88,4 @@ public class User implements UserDetails {  // UserDetails 상속받아 인증 �
         return true;    // true -> 사용 가능
     }
 
-    // 사용자 이름 변경
-    public User update(String nickname) {
-        this.nickname = nickname;
-
-        return this;
-    }
 }

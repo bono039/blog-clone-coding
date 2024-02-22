@@ -6,16 +6,16 @@ if(deleteBtn) {
         let id = document.getElementById('article-id').value;
 
         function success() {
-            alert("삭제 완료!");
-            location.replace("/articles");
+            alert('삭제 완료!');
+            location.replace('/articles');
         }
 
         function fail() {
-            alert("삭제 실패ㅠ");
-            location.replace("/articles");
+            alert('삭제 실패ㅠ');
+            location.replace('/articles');
         }
 
-        httpRequest("DELETE", "/api/articles/" + id, null, success, fail);
+        httpRequest('DELETE', '/api/articles/' + id, null, success, fail);
     });
 }
 
@@ -33,16 +33,16 @@ if(modifyBtn) {
         });
 
         function success() {
-            alert("수정 완료!");
-            location.replace("/articles/" + id);
+            alert('수정 완료!');
+            location.replace('/articles/' + id);
         }
 
         function fail() {
-            alert("수정 실패ㅠ");
-            location.replace("/articles/" + id);
+            alert('수정 실패ㅠ');
+            location.replace('/articles/' + id);
         }
 
-        httpRequest("PUT", "/api/articles/" + id, body, success, fail);
+        httpRequest('PUT', '/api/articles/' + id, body, success, fail);
     });
 }
 
@@ -60,12 +60,12 @@ if(createBtn) {
         function success() {
             alert('등록 완료!');
             location.replace('/articles');
-        }
+        };
 
         function fail() {
             alert('등록 실패ㅠ');
             location.replace('/articles');
-        }
+        };
 
         httpRequest('POST', '/api/articles', body, success, fail)
     });
@@ -76,9 +76,9 @@ function getCookie(key) {
     var result = null;
     var cookie = document.cookie.split(';');
     cookie.some(function (item) {
-       item = item.replace(" ", "");
+       item = item.replace(' ', '');
 
-       var dic = item.split("=");
+       var dic = item.split('=');
 
        if(key === dic[0]) {
            result = dic[1];
@@ -95,8 +95,8 @@ function httpRequest(method, url, body, success, fail) {
         method: method,
         headers: {
             // 로컬 스토리지에서 액세스 토큰 값 가져와 헤더에 추가
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-            "Content-Type": "application/json",
+            Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+            'Content-Type': 'application/json',
         },
         body: body,
     }).then(response => {
@@ -104,16 +104,16 @@ function httpRequest(method, url, body, success, fail) {
             return success;
         }
 
-        const refresh_token = getCookie("refresh_token");
+        const refresh_token = getCookie('refresh_token');
         if(response.status === 401 && refresh_token) {   // 권한 없다는 에러코드 발생
-            fetch("/api/token", {
-                method: "POST",
+            fetch('/api/token', {
+                method: 'POST',
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("access_token"),
-                    "Content-Type": "application/json",
+                    Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    refreshToken: getCookie("refresh_token"),
+                    refreshToken: getCookie('refresh_token'),
                 }),
             })
                 .then(res => {
@@ -123,7 +123,7 @@ function httpRequest(method, url, body, success, fail) {
                 })
                 .then(result => {
                     // 재발급 성공하면 로컬 스토리지값을 새로운 액세스 토큰으로 교체
-                    localStorage.setItem("access_token", result.accessToken);
+                    localStorage.setItem('access_token', result.accessToken);
                     httpRequest(method, url, body, success, fail);
                 })
                 .catch(error => fail());
