@@ -9,9 +9,10 @@ spring:
     # 테이블 생성 후, data.sql 실행
     defer-datasource-initialization: true
 
-  datasource: # DB 정보 추가
-    url: jdbc:h2:mem:testdb
-    username: sa
+# 애플리케이션 실행시 일래스틱 빈스토크에서 값 덮어쓰므로 datasource 항목 삭제
+#  datasource: # DB 정보 추가
+#    url: jdbc:h2:mem:testdb
+#    username: sa
 
   h2: # H2 서버 활성화
     console:
@@ -22,13 +23,13 @@ spring:
       client:
         registration:
           google:
-            client-id: <<클라이언트ID>>
-            client-secret: <<클라리언트 보안 비밀번호>>
+            client-id:
+            client-secret:
             scope:
               - email
               - profile
 
 
 jwt:
-  issuer: wendyhan03@naver.com
+  issuer: wendyhan03@gmail.com
   secret_key: study-springboot
