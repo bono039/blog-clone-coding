@@ -36,6 +36,9 @@ dependencies {
 
     // OAuth2 사용하기 위한 스타터 추가
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // 아마존 서버에서 사용할 MySQL
+    implementation 'mysql:mysql-connector-java'
 }
 
 test {
