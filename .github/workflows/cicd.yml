@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
+          distribution: 'corretto'
           java-version: '17'
 
       - name: Grant execute permission for gradlew
@@ -46,4 +46,4 @@ jobs:
           environment_name: springboot-blog-env
           version_label: github-action-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
-          deployment_package: ./build/libs/${env.artifact}
+          deployment_package: ./build/libs/${{env.artifact}}
