@@ -9,7 +9,6 @@ spring:
     # 테이블 생성 후, data.sql 실행
     defer-datasource-initialization: true
 
-# 애플리케이션 실행시 일래스틱 빈스토크에서 값 덮어쓰므로 datasource 항목 삭제
 #  datasource: # DB 정보 추가
 #    url: jdbc:h2:mem:testdb
 #    username: sa
@@ -23,12 +22,11 @@ spring:
       client:
         registration:
           google:
-            client-id:
-            client-secret:
+            client-id: client-id
+            client-secret: client-secret
             scope:
               - email
               - profile
-
 
 jwt:
   issuer: wendyhan03@gmail.com
