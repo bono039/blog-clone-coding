@@ -1,5 +1,7 @@
 package me.bono039.springbootblog.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,11 @@ import me.bono039.springbootblog.domain.Article;
 @Getter
 public class AddArticleRequest {
 
+    @NotNull
+    @Size(min = 1, max = 10)
     private String title;
+
+    @NotNull
     private String content;
 
     // 생성자 사용해 객체 생성

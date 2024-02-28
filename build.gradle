@@ -17,6 +17,7 @@ dependencies {
 
     // 스프링 데이터 JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     runtimeOnly 'com.h2database:h2'         // 인메모리 DB
     compileOnly 'org.projectlombok:lombok'  // 롬복 - 반복 메서드 작성 작업 줄임
     annotationProcessor 'org.projectlombok:lombok'
@@ -39,6 +40,9 @@ dependencies {
 
     // 아마존 서버에서 사용할 MySQL
     implementation 'mysql:mysql-connector-java'
+
+    // Faker : 테스트 시 가짜 데이터 생성하는 오픈소스 라이브러리
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
 }
 
 test {
@@ -46,5 +50,5 @@ test {
 }
 
 jar {
-    enabled = false
+    enabled = false // plain jar 파일 생성 방지용
 }
